@@ -8,9 +8,6 @@ import io.github.zachtib.coloutodo.extensions.onClick
 import io.github.zachtib.coloutodo.ui.FragmentView
 import io.github.zachtib.coloutodo.ui.todoadapter.TodoAdapter
 import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : FragmentView(R.layout.main_fragment) {
@@ -21,7 +18,7 @@ class MainFragment : FragmentView(R.layout.main_fragment) {
 
     private val viewModel: MainViewModel by viewModel()
 
-    private fun confirmDelete(todo: Todo) = GlobalScope.launch(Dispatchers.Main) {
+    private suspend fun confirmDelete(todo: Todo) {
         if (showConfirmationDialog("Delete \"${todo.label}\"?")) {
             viewModel.deleteItem(todo)
         }

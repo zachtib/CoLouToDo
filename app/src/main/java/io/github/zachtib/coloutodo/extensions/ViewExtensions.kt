@@ -20,3 +20,12 @@ fun View.onClick(action: suspend () -> Unit) {
         }
     }
 }
+
+fun View.onLongClick(action: suspend () -> Unit) {
+    setOnLongClickListener {
+        GlobalScope.launch(Dispatchers.Main) {
+            action()
+        }
+        true
+    }
+}

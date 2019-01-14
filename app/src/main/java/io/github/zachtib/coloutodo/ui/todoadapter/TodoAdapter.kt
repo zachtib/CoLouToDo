@@ -1,5 +1,6 @@
 package io.github.zachtib.coloutodo.ui.todoadapter
 
+import android.graphics.Paint
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -7,23 +8,28 @@ import androidx.recyclerview.widget.RecyclerView
 import io.github.zachtib.coloutodo.R
 import io.github.zachtib.coloutodo.data.Todo
 import io.github.zachtib.coloutodo.extensions.inflate
+import io.github.zachtib.coloutodo.extensions.onLongClick
+import io.github.zachtib.coloutodo.extensions.setStrikethrough
 import kotlinx.android.synthetic.main.item_todo.view.*
 
+typealias OnChecked = (Todo, Boolean) -> Any
+typealias OnLongPress = suspend (Todo) -> Any
+
 class TodoAdapter(
-    private val onCheckedListener: (Todo, Boolean) -> Any,
-    private val onLongPressListener: (Todo) -> Any
+    private val onCheckedListener: OnChecked,
+    private val onLongPressListener: OnLongPress
 ) : ListAdapter<Todo, TodoAdapter.TodoViewHolder>(TodoDiffCallback) {
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(todo: Todo, onCheckedListener: (Todo, Boolean) -> Any, onLongPressListener: (Todo) -> Any) {
+        fun bind(todo: Todo, onCheckedListener: OnChecked, onLongPressListener: OnLongPress) {
             itemView.todoCheckBox.apply {
                 isChecked = todo.isComplete
-                text = todo.label
                 setOnCheckedChangeListener { _, isChecked -> onCheckedListener(todo, isChecked) }
-                setOnLongClickListener {
-                    onLongPressListener(todo)
-                    true
-                }
+            }
+            itemView.todoLabel.apply {
+                text = todo.label
+                setStrikethrough(todo.isComplete)
+                onLongClick { onLongPressListener(todo) }
             }
         }
     }
