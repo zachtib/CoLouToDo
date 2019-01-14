@@ -6,12 +6,22 @@
                                                    android:layout_height="wrap_content" android:id="@+id/itemLayout">
 
     <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/todoCheckBox"
+            android:checked="false" style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+            android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+    />
+    <TextView
+            android:text="TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/todoCheckBox" tools:text="@tools:sample/lorem"
-            android:checked="false" style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="8dp"
-            app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:id="@+id/todoLabel" app:layout_constraintStart_toEndOf="@+id/todoCheckBox"
+            android:layout_marginStart="16dp" android:layout_marginTop="16dp" app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="@tools:sample/lorem" android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
+    />
 </androidx.constraintlayout.widget.ConstraintLayout>
