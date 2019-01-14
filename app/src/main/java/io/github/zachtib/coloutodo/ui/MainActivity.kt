@@ -18,4 +18,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun navigateToScreen(screen: Screen) {
+        supportFragmentManager.transaction {
+            replace(R.id.container, screen.getFragment())
+        }
+    }
+
 }

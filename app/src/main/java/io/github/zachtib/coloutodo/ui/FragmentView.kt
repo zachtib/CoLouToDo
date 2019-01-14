@@ -23,12 +23,19 @@ abstract class FragmentView(@LayoutRes private val layoutId: Int) : Fragment() {
         this.observe(viewLifecycleOwner, Observer { observer(it) })
     }
 
+    protected fun navigateToScreen(screen: Screen) {
+        activity?.let { parent ->
+            if (parent is MainActivity) {
+                parent.navigateToScreen(screen)
+            }
+        }
+    }
+
     suspend fun showTextInputDialog(
         prompt: String,
         positiveMessage: String = "OK",
         negativeMessage: String = "Cancel"
     ) = suspendCoroutine<String?> {
-
         val textField = EditText(context)
         AlertDialog.Builder(requireContext())
             .setMessage(prompt)
