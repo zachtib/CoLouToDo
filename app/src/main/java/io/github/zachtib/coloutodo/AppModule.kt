@@ -1,4 +1,4 @@
-package io.github.zachtib.coloutodo.inject
+package io.github.zachtib.coloutodo
 
 import androidx.room.Room
 import io.github.zachtib.coloutodo.data.AppDatabase

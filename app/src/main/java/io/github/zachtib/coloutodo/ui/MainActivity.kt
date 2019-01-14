@@ -1,8 +1,9 @@
-package io.github.zachtib.coloutodo
+package io.github.zachtib.coloutodo.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.transaction
+import io.github.zachtib.coloutodo.R
 import io.github.zachtib.coloutodo.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {

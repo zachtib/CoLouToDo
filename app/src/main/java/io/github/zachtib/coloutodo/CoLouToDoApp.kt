@@ -1,7 +1,6 @@
 package io.github.zachtib.coloutodo
 
 import android.app.Application
-import io.github.zachtib.coloutodo.inject.appModule
 import org.koin.android.ext.android.startKoin
 import timber.log.Timber
 

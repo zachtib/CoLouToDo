@@ -1,4 +1,4 @@
-package io.github.zachtib.coloutodo.ui
+package io.github.zachtib.coloutodo.ui.todoadapter
 
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +9,9 @@ import io.github.zachtib.coloutodo.data.Todo
 import io.github.zachtib.coloutodo.extensions.inflate
 import kotlinx.android.synthetic.main.item_todo.view.*
 
-class TodoAdapter(private val onCheckedListener: (Todo, Boolean) -> Unit) : ListAdapter<Todo, TodoAdapter.TodoViewHolder>(TodoDiffCallback) {
+class TodoAdapter(private val onCheckedListener: (Todo, Boolean) -> Unit) : ListAdapter<Todo, TodoAdapter.TodoViewHolder>(
+    TodoDiffCallback
+) {
 
     class TodoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(todo: Todo, onCheckedListener: (Todo, Boolean) -> Unit) {
@@ -21,11 +23,11 @@ class TodoAdapter(private val onCheckedListener: (Todo, Boolean) -> Unit) : List
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoAdapter.TodoViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
         return TodoViewHolder(parent.inflate(R.layout.item_todo))
     }
 
-    override fun onBindViewHolder(holder: TodoAdapter.TodoViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
         holder.bind(getItem(position), onCheckedListener)
     }
 

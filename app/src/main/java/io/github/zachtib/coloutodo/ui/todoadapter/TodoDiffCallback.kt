@@ -1,4 +1,4 @@
-package io.github.zachtib.coloutodo.ui
+package io.github.zachtib.coloutodo.ui.todoadapter
 
 import androidx.recyclerview.widget.DiffUtil
 import io.github.zachtib.coloutodo.data.Todo

@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.zachtib.coloutodo.R
 import io.github.zachtib.coloutodo.ui.FragmentView
-import io.github.zachtib.coloutodo.ui.TodoAdapter
+import io.github.zachtib.coloutodo.ui.todoadapter.TodoAdapter
 import kotlinx.android.synthetic.main.main_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
