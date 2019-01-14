@@ -10,10 +10,13 @@ class TodoService(db: AppDatabase) {
         dao.getAllTodos()
     }
 
-    fun createTodo(label: String) {
-        GlobalScope.launch {
-            dao.insertTodo(Todo(label = label))
-        }
+    fun createTodo(label: String) = GlobalScope.launch {
+        dao.insertTodo(Todo(label = label))
+    }
+
+    fun setItemComplete(todo: Todo, complete: Boolean) = GlobalScope.launch {
+        val newTodo = todo.copy(isComplete = complete)
+        dao.updateTodo(newTodo)
     }
 
 }

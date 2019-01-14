@@ -1,19 +1,14 @@
 package io.github.zachtib.coloutodo.ui.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import io.github.zachtib.coloutodo.BuildConfig
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.zachtib.coloutodo.R
-import io.github.zachtib.coloutodo.extensions.visible
+import io.github.zachtib.coloutodo.ui.FragmentView
+import io.github.zachtib.coloutodo.ui.TodoAdapter
 import kotlinx.android.synthetic.main.main_fragment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
-class MainFragment : Fragment() {
+class MainFragment : FragmentView(R.layout.main_fragment) {
 
     companion object {
         fun newInstance() = MainFragment()
@@ -21,27 +16,17 @@ class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModel()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = inflater.inflate(R.layout.main_fragment, container, false)
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        generateButton.visible(BuildConfig.DEBUG)
+        val todoAdapter = TodoAdapter(viewModel::itemChecked)
 
-        generateButton.setOnClickListener {
-            Timber.d("Generate Button clicked")
-            viewModel.generateSampleData()
+        todoRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = todoAdapter
         }
 
-        viewModel.allTodoItems.observe(this, Observer { items ->
-            Timber.d("Got new items:")
-            items.forEachIndexed { index, item ->
-                Timber.d("$index: $item")
-            }
-        })
+        viewModel.allTodoItems.observe(todoAdapter::submitList)
     }
 
 }
