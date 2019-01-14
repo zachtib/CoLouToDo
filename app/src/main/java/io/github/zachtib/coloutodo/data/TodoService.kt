@@ -19,4 +19,8 @@ class TodoService(db: AppDatabase) {
         dao.updateTodo(newTodo)
     }
 
+    fun deleteTodo(todo: Todo) = GlobalScope.launch {
+        dao.deleteTodo(todo)
+    }
+
 }

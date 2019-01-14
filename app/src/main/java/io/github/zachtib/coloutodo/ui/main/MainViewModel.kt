@@ -11,4 +11,12 @@ class MainViewModel(private val service: TodoService) : ViewModel() {
     fun itemChecked(todo: Todo, isChecked: Boolean) {
         service.setItemComplete(todo, isChecked)
     }
+
+    fun newItemCreated(label: String) {
+        service.createTodo(label)
+    }
+
+    fun deleteItem(todo: Todo) {
+        service.deleteTodo(todo)
+    }
 }
