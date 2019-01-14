@@ -21,18 +21,16 @@ class MainFragment : FragmentView(R.layout.main_fragment) {
 
     private val viewModel: MainViewModel by viewModel()
 
+    private fun confirmDelete(todo: Todo) = GlobalScope.launch(Dispatchers.Main) {
+        if (showConfirmationDialog("Delete \"${todo.label}\"?")) {
+            viewModel.deleteItem(todo)
+        }
+    }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val onDeleteHandler = { todo: Todo ->
-            GlobalScope.launch(Dispatchers.Main) {
-                if (showConfirmationDialog("Delete \"${todo.label}\"?")) {
-                    viewModel.deleteItem(todo)
-                }
-            }
-        }
-
-        val todoAdapter = TodoAdapter(viewModel::itemChecked, onDeleteHandler)
+        val todoAdapter = TodoAdapter(viewModel::itemChecked, this::confirmDelete)
 
         todoRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -40,13 +38,10 @@ class MainFragment : FragmentView(R.layout.main_fragment) {
         }
 
         createTodoButton.onClick {
-            val result = showTextInputDialog("Enter a new Todo:")
-            result?.let(viewModel::newItemCreated)
+            showTextInputDialog("Enter a new Todo:")?.let(viewModel::newItemCreated)
         }
 
         viewModel.allTodoItems.observe(todoAdapter::submitList)
     }
-
-
 
 }
