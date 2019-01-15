@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.github.zachtib.coloutodo.R
 import io.github.zachtib.coloutodo.data.Todo
-import io.github.zachtib.coloutodo.extensions.onClick
 import io.github.zachtib.coloutodo.ui.FragmentView
 import io.github.zachtib.coloutodo.ui.todoadapter.TodoAdapter
 import kotlinx.android.synthetic.main.main_fragment.*
@@ -33,6 +32,7 @@ class MainFragment : FragmentView(R.layout.main_fragment) {
             layoutManager = LinearLayoutManager(context)
             adapter = todoAdapter
         }
+
 
         createTodoButton.onClick {
             showTextInputDialog("Enter a new Todo:")?.let(viewModel::newItemCreated)

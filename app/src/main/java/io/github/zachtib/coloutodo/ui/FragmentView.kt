@@ -7,14 +7,14 @@ import android.view.ViewGroup
 import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import io.github.zachtib.coloutodo.extensions.textValue
+import io.github.zachtib.coloutodo.extensions.stringValue
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-abstract class FragmentView(@LayoutRes private val layoutId: Int) : Fragment() {
+abstract class FragmentView(@LayoutRes private val layoutId: Int) : CoroutineFragment() {
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(layoutId, container, false)
     }
@@ -40,7 +40,7 @@ abstract class FragmentView(@LayoutRes private val layoutId: Int) : Fragment() {
         AlertDialog.Builder(requireContext())
             .setMessage(prompt)
             .setView(textField)
-            .setPositiveButton(positiveMessage) { _, _ -> it.resume(textField.textValue) }
+            .setPositiveButton(positiveMessage) { _, _ -> it.resume(textField.stringValue) }
             .setNegativeButton(negativeMessage) { _, _ -> it.resume(null) }
             .create()
             .show()

@@ -12,3 +12,6 @@ fun TextView.setFlag(value: Boolean, flag: Int) {
         paintFlags and flag.inv()
     }
 }
+
+val TextView.stringValue: String
+    get() = this.text.toString()
